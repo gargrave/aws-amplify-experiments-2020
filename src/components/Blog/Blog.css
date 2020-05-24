@@ -1,0 +1,14 @@
+.blog {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  font-size: 1.5rem;
+  padding: 0.75rem 1rem;
+}
+
+.blog + .blog {
+  margin-top: 16px;
+}
+
+.blog__id {
+  font-size: 1rem;
+}
