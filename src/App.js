@@ -1,13 +1,17 @@
 import React from "react";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import { API, graphqlOperation } from "aws-amplify";
 
 import { Blog } from "./components";
-import { parsePayload } from "./gql/helpers/parsePayload";
-import { createBlog } from "./gql/mutations";
+import { performMutation, performQuery } from "./gql/api";
+import { createBlog, deleteBlog } from "./gql/mutations";
 import { listBlogs } from "./gql/queries";
 
 import "./App.css";
+
+const isSameBlog = (blogA) => (blogB) => blogA.id === blogB.id;
+
+const sortByName = ({ name: nameA }, { name: nameB }) =>
+  nameA === nameB ? 0 : nameA > nameB ? 1 : -1;
 
 function App() {
   const [blogs, setBlogs] = React.useState([]);
@@ -26,19 +30,25 @@ function App() {
     const { name } = payload;
 
     if (name) {
-      const result = await API.graphql(
-        graphqlOperation(createBlog, { input: { name } })
-      );
-      const newBlog = parsePayload("createBlog")(result);
+      const newBlog = await performMutation(createBlog, { name });
       setBlogs((prevBlogs) => [...prevBlogs, newBlog]);
+    }
+  };
+
+  const handleDeleteBlog = async (payload) => {
+    const { id } = payload;
+    if (id) {
+      const deletedBlog = await performMutation(deleteBlog, { id });
+      const isDeletedBlog = isSameBlog(deletedBlog);
+      setBlogs((prevBlogs) => prevBlogs.filter((blog) => !isDeletedBlog(blog)));
     }
   };
 
   React.useEffect(() => {
     const asyncFetchAll = async () => {
-      const blogs = await API.graphql(graphqlOperation(listBlogs));
-      const blogsData = parsePayload("listBlogs")(blogs);
-      setBlogs(blogsData);
+      const blogs = await performQuery(listBlogs);
+      blogs.sort(sortByName);
+      setBlogs(blogs);
     };
     asyncFetchAll();
   }, []);
@@ -47,7 +57,9 @@ function App() {
     <div className="App">
       <main className="mainContent">
         {blogs.length ? (
-          blogs.map((blog) => <Blog blog={blog} key={blog.id} />)
+          blogs.map((blog) => (
+            <Blog blog={blog} key={blog.id} onDelete={handleDeleteBlog} />
+          ))
         ) : (
           <div>Loading Blogs...</div>
         )}
