@@ -1,18 +1,20 @@
 .blogWrapper {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
   display: flex;
+  flex-flow: column;
+  padding: 0.75rem 1rem;
 }
 
 .blogWrapper + .blogWrapper {
   margin-top: 16px;
 }
 
-.blog {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+.blog__title {
   font-size: 1.5rem;
-  padding: 0.75rem 1rem;
 }
 
-.blog__id {
+.blog__id,
+.blog__posts {
   font-size: 1rem;
 }

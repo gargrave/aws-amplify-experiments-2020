@@ -6,6 +6,12 @@ export const listBlogs = {
         items {
           id
           name
+          posts {
+            items {
+              id
+              title
+            }
+          }
         }
       }
     }

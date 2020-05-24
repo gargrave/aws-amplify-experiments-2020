@@ -5,6 +5,11 @@ export const deleteBlog = {
       deleteBlog(input: $input) {
         id
         name
+        posts {
+          items {
+            id
+          }
+        }
       }
     }
   `,

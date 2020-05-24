@@ -5,6 +5,12 @@ export const createBlog = {
       createBlog(input: $input) {
         id
         name
+        posts {
+          items {
+            id
+            title
+          }
+        }
       }
     }
   `,
