@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-eggheadamplifytutori-dev-120815-authRole",
+            "UnauthRoleArn": "arn:aws:iam::563196615433:role/amplify-eggheadamplifytutori-dev-120815-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::563196615433:role/amplify-eggheadamplifytutori-dev-120815-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-eggheadamplifytutori-dev-120815-deployment",
+            "UnauthRoleName": "amplify-eggheadamplifytutori-dev-120815-unauthRole",
+            "StackName": "amplify-eggheadamplifytutori-dev-120815",
+            "StackId": "arn:aws:cloudformation:us-east-1:563196615433:stack/amplify-eggheadamplifytutori-dev-120815/ed434770-9df1-11ea-96cf-12c9c271ca70",
+            "AmplifyAppId": "dnjaegboar98s"
+        },
+        "categories": {
+            "auth": {
+                "eggheadamplifytutoricc339506": {}
+            }
+        }
+    }
+}
